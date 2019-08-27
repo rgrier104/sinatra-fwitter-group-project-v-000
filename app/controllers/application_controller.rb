@@ -55,12 +55,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/logout' do
-    erb :'/logout'
-  end
-
-  post '/logout' do
-    session.clear
-    redirect to '/'
+    if logged_in?
+      session.clear
+      redirect "/login"
+    else
+      redirect "/"
+    end
   end
 
   helpers do
